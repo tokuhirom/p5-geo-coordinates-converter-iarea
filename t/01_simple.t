@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More tests => 7;
+use Test::More tests => 9;
 use Geo::Coordinates::Converter;
 use Geo::Coordinates::Converter::iArea;
 
@@ -15,6 +15,8 @@ sub {
     is $point->lng, '139.723348';
     is $point->datum, 'wgs84';
     is $point->format, 'degree';
+    is $point->areacode, '05905';
+    is $geo->areacode, '05905';
 }->();
 
 # 404 area not found

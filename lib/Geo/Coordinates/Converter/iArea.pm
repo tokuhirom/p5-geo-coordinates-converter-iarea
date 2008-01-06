@@ -2,38 +2,33 @@ package Geo::Coordinates::Converter::iArea;
 use strict;
 use warnings;
 our $VERSION = '0.02';
-use File::ShareDir 'dist_file';
+use Geo::Coordinates::Converter;
+use Geo::Coordinates::Converter::iArea::DataLoader;
+Geo::Coordinates::Converter->add_default_formats('iArea');
 
 sub get_center {
     my ($class, $areacode) = @_;
 
-    my $file = dist_file('Geo-Coordinates-Converter-iArea', 'iarea-center.csv');
-    open my $fh, '<', $file or die $!;
-
-    my $geo;
-    while (my $line = <$fh>) {
-        if (index($line, $areacode) >= 0) {
-            my @dat = split m{,}, $line;
-
-            $geo = Geo::Coordinates::Converter->new(
-                lat    => $dat[1],
-                lng    => $dat[2],
-                datum  => 'tokyo',
-                format => 'degree'
-            );
-
-            last;
+    Geo::Coordinates::Converter::iArea::DataLoader->first(
+        sub {
+            my $dat = shift;
+            if ($dat->{areacode} eq $areacode) {
+                return Geo::Coordinates::Converter->new(
+                    lat      => $dat->{center_lat},
+                    lng      => $dat->{center_lng},
+                    datum    => 'tokyo',
+                    format   => 'degree',
+                    areacode => $areacode
+                );
+            }
         }
-    }
-
-    close $fh;
-    return $geo;
+    ) || undef;
 }
 
 1;
 __END__
 
-=for stopwords aaaatttt dotottto gmail DoCoMo MOVA csv FOMA
+=for stopwords aaaatttt dotottto gmail DoCoMo MOVA csv FOMA API
 
 =head1 NAME
 
