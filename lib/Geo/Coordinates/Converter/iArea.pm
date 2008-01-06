@@ -1,13 +1,13 @@
 package Geo::Coordinates::Converter::iArea;
 use strict;
 use warnings;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 use File::ShareDir 'dist_file';
 
 sub get_center {
     my ($class, $areacode) = @_;
 
-    my $file = dist_file('Geo-Coordinates-Converter-iArea', 'iarea-center.yaml');
+    my $file = dist_file('Geo-Coordinates-Converter-iArea', 'iarea-center.csv');
     open my $fh, '<', $file or die $!;
 
     my $geo;
@@ -44,6 +44,10 @@ Geo::Coordinates::Converter::iArea - get center point from iArea
   use Geo::Coordinates::Converter::iArea;
   Geo::Coordinates::Converter::iArea->get_center('00205');
   # => instance of Geo::Coordinates::Converter
+
+=head1 WARNINGS
+
+THIS MODULE IS IN ITS BETA QUALITY. THE API MAY CHANGE IN THE FUTURE.
 
 =head1 DESCRIPTION
 

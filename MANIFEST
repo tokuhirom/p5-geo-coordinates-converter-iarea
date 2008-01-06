@@ -22,6 +22,6 @@ Makefile.PL
 MANIFEST			This list of files
 META.yml
 README
-share/iarea-center.yaml
+share/iarea-center.csv
 t/00_compile.t
 t/01_simple.t
