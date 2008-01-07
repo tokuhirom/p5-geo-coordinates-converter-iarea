@@ -1,5 +1,9 @@
 Revision history for Perl extension Geo::Coordinates::Converter::iArea
 
+0.04
+
+    fixed PREREQ.
+
 0.03
     - added Format::iArea(Kazuhiro Osawa)
     - select areacode from position.
