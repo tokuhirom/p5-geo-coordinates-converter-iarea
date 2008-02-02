@@ -1,7 +1,7 @@
 package Geo::Coordinates::Converter::iArea;
 use strict;
 use warnings;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 use Geo::Coordinates::Converter;
 use Geo::Coordinates::Converter::iArea::DataLoader;
 Geo::Coordinates::Converter->add_default_formats('iArea');

@@ -9,6 +9,7 @@ requires $_ for (qw/
 
 install_share 'share';
 build_requires 'Test::More';
+build_requires 'ExtUtils::MakeMaker' => 6.42;
 use_test_base;
 auto_include;
 WriteAll;
