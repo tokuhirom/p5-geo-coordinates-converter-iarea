@@ -3,26 +3,27 @@ use strict;
 use warnings;
 our $VERSION = '0.05';
 use Geo::Coordinates::Converter;
-use Geo::Coordinates::Converter::iArea::DataLoader;
+use CDB_File;
+use File::ShareDir 'dist_file';
 Geo::Coordinates::Converter->add_default_formats('iArea');
 
 sub get_center {
     my ($class, $areacode) = @_;
 
-    Geo::Coordinates::Converter::iArea::DataLoader->first(
-        sub {
-            my $dat = shift;
-            if ($dat->{areacode} eq $areacode) {
-                return Geo::Coordinates::Converter->new(
-                    lat      => $dat->{center_lat},
-                    lng      => $dat->{center_lng},
-                    datum    => 'tokyo',
-                    format   => 'degree',
-                    areacode => $areacode
-                );
-            }
-        }
-    ) || undef;
+    my $file = dist_file('Geo-Coordinates-Converter-iArea', 'area2center.cdb');
+    my $cdb = CDB_File->TIEHASH($file);
+    if ($cdb->EXISTS($areacode)) {
+        my ($lat, $lng) = split /,/, $cdb->FETCH($areacode);
+        return Geo::Coordinates::Converter->new(
+            lat      => $lat,
+            lng      => $lng,
+            datum    => 'tokyo',
+            format   => 'degree',
+            areacode => $areacode,
+        );
+    } else {
+        return;
+    }
 }
 
 1;

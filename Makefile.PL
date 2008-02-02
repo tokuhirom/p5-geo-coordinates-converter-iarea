@@ -5,6 +5,7 @@ all_from 'lib/Geo/Coordinates/Converter/iArea.pm';
 requires $_ for (qw/
     File::ShareDir
     Geo::Coordinates::Converter
+    CDB_File
 /);
 
 install_share 'share';

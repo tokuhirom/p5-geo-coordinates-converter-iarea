@@ -3,13 +3,15 @@ use strict;
 use warnings;
 use base 'Geo::Coordinates::Converter::Format';
 our $VERSION = '0.01';
-use Geo::Coordinates::Converter::iArea::DataLoader;
+use File::ShareDir 'dist_file';
+use CDB_File;
+use Geo::Coordinates::Converter::iArea;
 
 sub name { 'iarea' }
 
 sub detect {
     my($self, $point) = @_;
-    return unless _get_center( $point->areacode );
+    return unless Geo::Coordinates::Converter::iArea->get_center( $point->areacode );
     return $self->name;
 }
 
@@ -18,24 +20,23 @@ sub from {
     my ($self, $point) = @_;
 
     my @mesh = _calc_meshcode($point);
-
-    # I know this code is slow... please tune up this code :)
-    my $mesh_re = join("|", @mesh);
-    my $re = qr{^(?:$mesh_re)$};
-    my $areacode = Geo::Coordinates::Converter::iArea::DataLoader->first(
-        sub {
-            my $dat = shift;
-
-            for my $mesh (@{$dat->{meshcodes}}) {
-                if ($mesh =~ $re) {
-                    return $dat->{areacode};
-                }
-            }
-        }
-    );
-
-    $point->areacode($areacode);
+    if (my $areacode = $self->_meshcode2areacode(@mesh)) {
+        $point->areacode($areacode);
+    }
     $point;
+}
+
+sub _meshcode2areacode {
+    my ($self, @mesh) = @_;
+
+    my $file = dist_file('Geo-Coordinates-Converter-iArea', 'meshcode2areacode.cdb');
+    my $cdb = CDB_File->TIEHASH($file);
+    for my $meshcode (@mesh) {
+        if ($cdb->EXISTS($meshcode)) {
+            return $cdb->FETCH($meshcode);
+        }
+    }
+    return;
 }
 
 sub _calc_meshcode {
@@ -106,7 +107,8 @@ sub _calc_meshcode {
 # iarea to other(e.g. wgs84)
 sub to {
     my($self, $point) = @_;
-    my $area_geo = _get_center($point->areacode ) || { lat => '0.000000', lng => '0.000000' };
+
+    my $area_geo = _get_center($point) || { lat => '0.000000', lng => '0.000000' };
 
     $point->lat($area_geo->{lat});
     $point->lng($area_geo->{lng});
@@ -116,20 +118,9 @@ sub to {
 }
 
 sub _get_center {
-    my $areacode = shift;
-
-    Geo::Coordinates::Converter::iArea::DataLoader->first(
-        sub {
-            my $dat = shift;
-
-            if ($dat->{areacode} eq $areacode) {
-                return +{
-                    lat => $dat->{center_lat},
-                    lng => $dat->{center_lng},
-                };
-            }
-        }
-    );
+    my $point = shift;
+    my $center = Geo::Coordinates::Converter::iArea->get_center( $point->areacode );
+    +{ lat => $center->lat, lng => $center->lng };
 }
 
 Geo::Coordinates::Converter::Point->mk_accessors(qw/ areacode /);
