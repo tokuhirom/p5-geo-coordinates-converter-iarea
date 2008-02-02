@@ -10,7 +10,7 @@ Geo::Coordinates::Converter->add_default_formats('iArea');
 sub get_center {
     my ($class, $areacode) = @_;
 
-    my $file = dist_file('Geo-Coordinates-Converter-iArea', 'area2center.cdb');
+    my $file = dist_file('Geo-Coordinates-Converter-iArea', 'areacode2center.cdb');
     my $cdb = CDB_File->TIEHASH($file);
     if ($cdb->EXISTS($areacode)) {
         my ($lat, $lng) = split /,/, $cdb->FETCH($areacode);
