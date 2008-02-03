@@ -1,5 +1,9 @@
 Revision history for Perl extension Geo::Coordinates::Converter::iArea
 
+0.06
+
+    - tune up the performance. use cdb;
+
 0.05
 
     - this module maybe requires ExtUtils::MakeMaker >= 6.42

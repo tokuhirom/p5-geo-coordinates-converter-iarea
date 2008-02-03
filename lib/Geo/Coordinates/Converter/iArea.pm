@@ -1,7 +1,8 @@
 package Geo::Coordinates::Converter::iArea;
 use strict;
 use warnings;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
+use 5.00800;
 use Geo::Coordinates::Converter;
 use CDB_File;
 use File::ShareDir 'dist_file';
