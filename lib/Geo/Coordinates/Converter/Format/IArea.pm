@@ -170,22 +170,9 @@ areacode accessor
 
 =back
 
-=head1 DATA FILE FORMAT
-
-    areacode,lat,lng
-
-csv format.
-
-=head1 Note
-
-This module very slow. But, this module is only for small edge case.
-This modules is called by very old obsolete DoCoMo phones, called MOVA.
-
-Please use posinfo=1 when user's phone is FOMA.
-
 =head1 AUTHOR
 
-Kazuhiro Osawa
+Kazuhiro Osawa, Tokuhiro Matsuno
 
 =head1 SEE ALSO
 
