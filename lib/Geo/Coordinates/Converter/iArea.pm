@@ -52,6 +52,12 @@ Geo::Coordinates::Converter::iArea is utilities for DoCoMo iArea.
 
 easy to get the center point of area.
 
+=head1 METHODS
+
+=head2 get_center
+
+get center of area code.
+
 =head1 AUTHOR
 
 Tokuhiro Matsuno E<lt>tokuhirom aaaatttt gmail dotottto commmmmE<gt>

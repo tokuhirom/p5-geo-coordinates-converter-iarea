@@ -170,6 +170,22 @@ areacode accessor
 
 =back
 
+=head1 INTERNAL METHODS
+
+=over 4
+
+=item name
+
+=item detect
+
+=item from
+
+=item to
+
+DO NOT USE DIRECTLY
+
+=back
+
 =head1 AUTHOR
 
 Kazuhiro Osawa, Tokuhiro Matsuno
