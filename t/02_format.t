@@ -10,14 +10,14 @@ sub {
 
     my $point = $geo->convert('degree' => 'wgs84');
     isa_ok $point, 'Geo::Coordinates::Converter::Point';
-    is $point->lat, '35.645168';
-    is $point->lng, '139.723347';
+    is $point->lat, '35.647771';
+    is $point->lng, '139.719441';
     is $point->datum, 'wgs84';
     is $point->format, 'degree';
     is $point->areacode, '05905';
 
-    is $geo->lat, '35.645168';
-    is $geo->lng, '139.723347';
+    is $geo->lat, '35.647771';
+    is $geo->lng, '139.719441';
     is $geo->datum, 'wgs84';
     is $geo->format, 'degree';
     is $geo->areacode, '05905';
