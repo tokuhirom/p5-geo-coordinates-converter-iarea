@@ -1,5 +1,9 @@
 Revision history for Perl extension Geo::Coordinates::Converter::iArea
 
+0.08
+
+    - updated mesh data file(2008-04-08 ver)
+
 0.07
 
     - document updated. no feature changes.
