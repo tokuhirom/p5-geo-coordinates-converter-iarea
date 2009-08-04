@@ -1,6 +1,8 @@
+.gitignore
 Changes
 inc/ExtUtils/MakeMaker.pm
 inc/Module/Install.pm
+inc/Module/Install/AuthorTests.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
 inc/Module/Install/Fetch.pm
@@ -29,3 +31,7 @@ t/00_compile.t
 t/01_simple.t
 t/02_format.t
 t/03_point2area.t
+xt/97_podspell.t
+xt/98_perlcritic.t
+xt/99_pod.t
+xt/perlcriticrc

@@ -6,7 +6,7 @@ requires 'File::ShareDir' => 1.00;
 requires 'Geo::Coordinates::Converter' => 0.04;
 requires 'CDB_File' => 0.96;
 
-author_tests 'xt';
+author_tests('xt');
 install_share 'share';
 build_requires 'Test::More';
 use_test_base;
