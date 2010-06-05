@@ -1,5 +1,9 @@
 Revision history for Perl extension Geo::Coordinates::Converter::iArea
 
+0.10
+
+    - added Geo::Coordinates::Converter::iArea->get_name.
+
 0.09
 
     - modernize the dist package
