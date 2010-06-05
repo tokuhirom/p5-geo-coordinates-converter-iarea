@@ -27,6 +27,20 @@ sub get_center {
     }
 }
 
+sub get_name {
+    my ($class, $areacode) = @_;
+
+    my $file = dist_file('Geo-Coordinates-Converter-iArea', 'areacode2name.cdb');
+    my $cdb = CDB_File->TIEHASH($file);
+    if ($cdb->EXISTS($areacode)) {
+        my $name = $cdb->FETCH($areacode);
+        utf8::decode($name);
+        return $name;
+    } else {
+        return;
+    }
+}
+
 1;
 __END__
 

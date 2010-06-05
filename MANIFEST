@@ -26,11 +26,13 @@ MANIFEST			This list of files
 META.yml
 README
 share/areacode2center.cdb
+share/areacode2name.cdb
 share/meshcode2areacode.cdb
 t/00_compile.t
 t/01_simple.t
 t/02_format.t
 t/03_point2area.t
+t/04_areacode2name.t
 xt/97_podspell.t
 xt/98_perlcritic.t
 xt/99_pod.t
