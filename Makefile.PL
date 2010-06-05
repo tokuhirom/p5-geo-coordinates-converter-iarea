@@ -3,7 +3,7 @@ name 'Geo-Coordinates-Converter-iArea';
 all_from 'lib/Geo/Coordinates/Converter/iArea.pm';
 
 requires 'Geo::Coordinates::Converter' => 0.04;
-requires 'Flie::ShareDir' => 1.02;
+requires 'File::ShareDir' => 1.02;
 requires 'Geo::Coordinates::Converter' => 0.04;
 
 author_tests('xt');
