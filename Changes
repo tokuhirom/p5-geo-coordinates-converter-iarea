@@ -1,5 +1,9 @@
 Revision history for Perl extension Geo::Coordinates::Converter::iArea
 
+0.11
+
+    - fixed deps for CDB_File
+
 0.10
 
     - added Geo::Coordinates::Converter::iArea->get_name.
