@@ -141,14 +141,45 @@ Geo::Coordinates::Converter::Format::IArea - get center point from iArea
 
 =head1 SYNOPSIS
 
+=over 4
+
+=item GET CENTER POINT FROM AREA CODE 
+
   use Geo::Coordinates::Converter;
+  use Geo::Coordinates::Converter::iArea;
 
-  my $geo = Geo::Coordinates::Converter->new( formats => [qw/ iArea /], format => 'iarea', areacode => '00205' )
+  my $geo = Geo::Coordinates::Converter->new( format => 'iarea', areacode => '00205' );
   my $point = $geo->convert('degree' => 'wgs84');
+  print "lat: ", $point->lat, " lng: ", $point->lng, "\n";
+  # => lat: 42.859220 lng: 141.492367
 
-  Geo::Coordinates::Converter->add_default_formats('iArea');
-  my $geo = Geo::Coordinates::Converter->new(  format => 'iarea', areacode => '00205' )
-  my $point = $geo->convert('degree' => 'wgs84');
+=item GET AREACODE FROM LOCATION POINT
+
+  use Geo::Coordinates::Converter;
+  use Geo::Coordinates::Converter::iArea;
+
+  my $geo = Geo::Coordinates::Converter->new( format => 'degree', datum => 'tokyo', lat => '42.859220', lng => '141.492367' );
+  my $point = $geo->convert('iarea');
+  print $point->areacode, "\n";
+  # => 00205
+
+=item INTEGRATE WITH HTTP::MobileAgent::Plugin::Locator
+
+  use Geo::Coordinates::Converter;
+  use Geo::Coordinates::Converter::iArea;
+  use CGI;
+  use HTTP::MobileAgent;
+  use HTTP::MobileAgent::Plugin::Locator;
+
+  my $q = CGI->new();
+  my $agent = HTTP::MobileAgent->new();
+  my $orig_point = $agent->get_location($q);
+  my $geo = Geo::Coordinates::Converter->new( point => $orig_point->clone );
+  my $point = $geo->convert('iarea');
+  print $point->areacode, "\n";
+  # => 00205
+
+=back
 
 =head1 DESCRIPTION
 
@@ -156,15 +187,15 @@ Geo::Coordinates::Converter::Format::IArea is utilities for DoCoMo iArea.
 
 easy to get the center point of area.
 
-=head1 EXPORT METHODS
+=head1 ADDITIONAL METHODS FOR Geo::Coordinates::Converter core.
 
 =over 4
 
-=item Geo::Coordinates::Converter->areacode
+=item Geo::Coordinates::Converter->areacode()
 
 areacode accessor
 
-=item Geo::Coordinates::Converter::Point->areacode
+=item Geo::Coordinates::Converter::Point->areacode()
 
 areacode accessor
 

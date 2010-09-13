@@ -48,29 +48,33 @@ __END__
 
 =head1 NAME
 
-Geo::Coordinates::Converter::iArea - get center point from iArea
+Geo::Coordinates::Converter::iArea - some utility functions around iArea
 
 =head1 SYNOPSIS
 
   use Geo::Coordinates::Converter::iArea;
-  Geo::Coordinates::Converter::iArea->get_center('00205');
+
+  # get center point location from iArea code.
+  my $point = Geo::Coordinates::Converter::iArea->get_center('00205');
   # => instance of Geo::Coordinates::Converter
-
-=head1 WARNINGS
-
-THIS MODULE IS IN ITS BETA QUALITY. THE API MAY CHANGE IN THE FUTURE.
 
 =head1 DESCRIPTION
 
 Geo::Coordinates::Converter::iArea is utilities for DoCoMo iArea.
 
-easy to get the center point of area.
-
 =head1 METHODS
 
-=head2 get_center
+=over 4
 
-get center of area code.
+=item my $point = Geo::Coordinates::Converter::iArea->get_center($areacode :Str);
+
+Get center point of area code. $point is instance of Geo::Coordinates::Converter.
+
+=item my $name = Geo::Coordinates::Converter::iArea->get_name($areacode :Str);
+
+Get the name of iArea from area code.
+
+=back
 
 =head1 AUTHOR
 
