@@ -8,7 +8,6 @@ requires 'CDB_File' => '0.96';
 
 author_tests('xt');
 install_share 'share';
-build_requires 'Test::More';
-use_test_base;
+test_requires 'Test::More';
 auto_include;
 WriteAll;
