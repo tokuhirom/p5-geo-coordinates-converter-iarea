@@ -1,5 +1,9 @@
 Revision history for Perl extension Geo::Coordinates::Converter::iArea
 
+0.14
+
+    - refactoring
+
 0.13
 
     - fixed packaging issue
