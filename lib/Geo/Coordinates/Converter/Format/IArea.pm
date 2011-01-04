@@ -123,7 +123,12 @@ sub _get_center {
     +{ lat => $center->lat, lng => $center->lng };
 }
 
-Geo::Coordinates::Converter::Point->mk_accessors(qw/ areacode /);
+sub Geo::Coordinates::Converter::Point::areacode {
+    return $_[0]->{'areacode'} if @_ == 1;
+    return $_[0]->{'areacode'} = $_[1] if @_ == 2;
+    shift->{'areacode'} = \@_;
+}
+
 sub Geo::Coordinates::Converter::areacode {
     my $self = shift;
     my $point = shift || $self->current;
